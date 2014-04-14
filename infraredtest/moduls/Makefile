@@ -1,0 +1,17 @@
+CC=/arm-linux-4.1.1/bin/arm-iwmmxt-linux-gnueabi-gcc -lm -pthread
+
+CFLAGS += -mcpu=iwmmxt -mtune=iwmmxt -mabi=aapcs-linux  \
+		-I./ -DDEBUG_BUILD
+
+SOURCES = camera.c main.c overlay2.c angle_recognition.c functions.c panorama.c labeling.c stereo.c map_read.c
+OBJECTS = ${SOURCES:.c=.o}
+
+LFLAGS += -lpthread
+
+OUT = mission
+
+$(OUT): $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $(OUT) $(OBJECTS) $(LIBS)
+
+clean: 
+	rm -f mission *.o *.?~

@@ -1,0 +1,58 @@
+#ifndef _MOTION_H_
+#define _MOTION_H_ 
+
+#include "common.h"
+
+/*
+int goForward(int dst); // distance FAR/NEAR
+int walk(int dir); // direction
+
+// int moveDistance(int dir, );
+
+int turn(int degree);
+
+int grabTarget(Target t);
+int throwTarget(); // TODO: Target에 따라?
+
+int stopMovement();
+*/
+
+
+int writeCommand(int cmd);
+void motion(int cmd);
+void confirm_Response();
+
+
+void moveStop();
+void moveLeft();
+void moveRight();
+void moveStraight();
+void seeDown();
+void seeUp();
+
+void rightOneStep();
+void leftOneStep();
+
+void slightlyRightOneStep();
+void slightlyLeftOneStep();
+void slightlyFrontOneStep();
+
+void kickRight();
+void kickLeft();
+
+void moderatekickRight();
+void moderatekickLeft();
+
+void strongkickRight();
+void strongkickLeft();
+
+void KickDiagonalRight();
+
+void turnLeft();
+void turnRight();
+
+void turnLeftInPlace();
+void turnRightInPlace();
+#endif
+
+

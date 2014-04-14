@@ -1,0 +1,19 @@
+CC=/usr/local/arm-linux-4.1.1/bin/arm-iwmmxt-linux-gnueabi-gcc
+
+CFLAGS += -mcpu=iwmmxt -mtune=iwmmxt -mabi=aapcs-linux	\
+		-I./ -DDEBUG_BUILD
+
+LDFLAGS += -lpthread -lm
+
+SRC = main.c camera.c overlay2.c modules/color.c
+OBJ = ${SRC:.c=.o}
+
+OUT = colorMatrix
+BUILDDIR = bin/
+
+$(OUT): $(OBJ)
+	mkdir -p $(BUILDDIR)
+	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -o $(BUILDDIR)$(OUT) $(LIBS)
+
+clean: 
+	rm -f $(BUILDDIR)$(OUT) *.o *.?~ modules/*.o modules/*.?~ 

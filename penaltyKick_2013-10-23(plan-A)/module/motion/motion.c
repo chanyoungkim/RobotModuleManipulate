@@ -1,0 +1,262 @@
+#include "module/motion/motion.h"
+
+#define UNDEFINED_CMD	-1
+
+#define SEEDOWN		31
+
+#define MOVE_STRAIGHT	2
+#define MOVE_RIGHT	3
+#define MOVE_LEFT	1
+#define STOP		26
+
+#define RIGHTONESTEP	20
+#define LEFTONESTEP	15
+
+#define SLIGHTLY_LEFT_ONESTEP	18
+#define SLIGHTLY_RIGHT_ONESTEP	23
+#define SLIGHTLY_FRONT_ONESTEP	0
+
+#define KICKRIGHT	6
+#define KICKLEFT	4
+
+#define MODERATEKICKRIGHT 9
+#define MODERATEKICKLEFT 7
+
+#define STRONGKICKRIGHT 24
+#define STRONGKICKLEFT 22
+
+#define KICKDIAGONALRIGHT 5
+
+#define TURNLEFT		17
+#define	TURNRIGHT		27
+
+#define TURNLEFTINPLACE 14
+#define TURNRIGHTINPLACE 13
+
+
+void motion(int cmd) {
+	switch(cmd) {
+	case MOVE_STRAIGHT:
+	case MOVE_RIGHT:
+	case MOVE_LEFT:
+
+	case STOP:
+		
+	case SEEDOWN:
+
+	case LEFTONESTEP:
+	case RIGHTONESTEP:
+ 
+	case SLIGHTLY_LEFT_ONESTEP:
+	case SLIGHTLY_RIGHT_ONESTEP:
+
+	case KICKRIGHT:	
+	case KICKLEFT:
+
+	case MODERATEKICKRIGHT:	
+	case MODERATEKICKLEFT:
+
+	case STRONGKICKRIGHT:
+	case STRONGKICKLEFT:
+
+	case KICKDIAGONALRIGHT:
+
+	case TURNRIGHT:
+	case TURNLEFT:
+	
+	case TURNLEFTINPLACE:
+	case TURNRIGHTINPLACE:
+		writeCommand(cmd);
+		break;
+
+	case SLIGHTLY_FRONT_ONESTEP:
+		writeCommand(cmd);
+		writeCommand(1);
+
+		break;
+	}	
+}
+
+int writeCommand(int cmd)
+{
+// 	#ifdef DEBUG_NOACTION
+	write(fdBackBoard, &cmd, 1);
+	// #endif
+
+	return 0;
+}
+
+void confirm_Response(){
+	// #ifdef DEBUG_NOACTION
+	while(1) {
+	if(read(fdBackBoard, &response, 1) > 0) {	// 읽는데 성공하면 루프 탈출
+
+		//	printf("response message : %d\n", response);
+			break;
+		}
+	}
+	// #endif
+}
+
+void moveStop(){
+	command = STOP;	// stop
+	motion(command);
+	command = UNDEFINED_CMD;
+	
+	confirm_Response();
+	
+}
+
+void moveLeft(){
+	command = MOVE_LEFT;
+	motion(command);
+	command = UNDEFINED_CMD;
+}
+void moveRight(){
+	command = STOP;	
+	motion(MOVE_RIGHT);
+	command = UNDEFINED_CMD;
+}
+void moveStraight(){
+	command = MOVE_STRAIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+}
+
+
+void seeDown()
+{
+	command = SEEDOWN;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response();
+}
+
+void seeUp()
+{
+	command = STOP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response();
+}
+
+void rightOneStep()
+{
+	command = RIGHTONESTEP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void leftOneStep(){
+	command = LEFTONESTEP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void slightlyRightOneStep(){
+	command = SLIGHTLY_RIGHT_ONESTEP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void slightlyLeftOneStep(){
+	command = SLIGHTLY_LEFT_ONESTEP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void slightlyFrontOneStep(){
+	command = SLIGHTLY_FRONT_ONESTEP;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void kickRight(){
+	command = KICKRIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void kickLeft(){
+	command = KICKLEFT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void moderatekickRight(){
+	command = MODERATEKICKRIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void moderatekickLeft(){
+	command = MODERATEKICKLEFT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void strongkickRight(){
+	command = STRONGKICKRIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void strongkickLeft(){
+	command = STRONGKICKLEFT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+
+void KickDiagonalRight(){
+	command = KICKDIAGONALRIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+
+}
+
+
+void turnLeft(){
+	command = TURNLEFT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+}
+
+void turnRight(){
+	command = TURNRIGHT;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+
+}
+
+void turnLeftInPlace(){
+	command = TURNLEFTINPLACE;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+
+}
+
+void turnRightInPlace(){
+	command = TURNRIGHTINPLACE;
+	motion(command);
+	command = UNDEFINED_CMD;
+	confirm_Response(); 
+
+}
+
+
